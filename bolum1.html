@@ -6,8 +6,12 @@
     <title>Bölüm 1: Küllerden Doğuş - Ateşin Kanatları</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-firestore-compat.js"></script>
 </head>
-<body>
+<body data-chapter-id="bolum1">
     <header class="main-header">
         <nav>
             <div class="logo"><a href="index.html">Ateşin Kanatları</a></div>
@@ -24,6 +28,51 @@
     <main class="chapter-content">
         <article>
             <h1>Bölüm 1: Küllerden Doğuş</h1>
+
+            <!-- Bölüm Etiketleri -->
+            <div class="chapter-tags">
+                <span class="tag">Macera</span>
+                <span class="tag">Fantastik</span>
+                <span class="tag">Giriş</span>
+                <span class="tag">Keşif</span>
+            </div>
+
+            <!-- Bölüm İstatistikleri -->
+            <div class="chapter-stats">
+                <div class="stat-item">
+                    <i class="fas fa-eye"></i>
+                    <span>1.2K Okuma</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-heart"></i>
+                    <span id="like-count">0 Beğeni</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-comment"></i>
+                    <span id="comment-count">0 Yorum</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-clock"></i>
+                    <span>10 dk Okuma</span>
+                </div>
+            </div>
+
+            <!-- Etkileşim Butonları -->
+            <div class="interaction-buttons">
+                <button id="like-button" onclick="toggleLike('bolum1')" class="action-button">
+                    <i class="fas fa-heart"></i>
+                    Beğen
+                </button>
+                <button id="reading-list-button" onclick="toggleReadingList('bolum1')" class="action-button">
+                    <i class="fas fa-bookmark"></i>
+                    Okuma Listesine Ekle
+                </button>
+                <button id="notification-button" onclick="subscribeToNotifications('bolum1')" class="action-button">
+                    <i class="fas fa-bell"></i>
+                    Bildirimleri Aç
+                </button>
+            </div>
+
             <div class="chapter-text">
                 <p>Sislerin çöktüğü bir şafak vakti, Zethara'nın yerle bir edilmiş topraklarında bir kızıl gün doğmakta. Gökyüzü, alevlerin izleriyle çizilmişçesine parçalanmış bulutlarla dolu. Toprağa karışmış küller, her adımda bir ölüm melodisi gibi çıtlıyor. Bu, kadim bir halkın yeniden doğuş hikayesinin başlangıcı.</p>
 
@@ -54,11 +103,45 @@
                 </div>
 
                 <p class="chapter-end">Bu, Zethara'nın küllerden doğuşunun sadece ilk adımıydı. Her adım, yeni soruları ve daha büyük bir çatışmayı beraberinde getirecekti.</p>
+            </div>
 
-                <div class="chapter-navigation">
-                    <a href="#" class="nav-button disabled">← Önceki Bölüm</a>
-                    <a href="bolum2.html" class="nav-button">Sonraki Bölüm →</a>
-                </div>
+            <!-- Paylaşım Butonları -->
+            <div class="share-buttons">
+                <a href="#" class="share-button" onclick="shareOnTwitter()">
+                    <i class="fab fa-twitter"></i>
+                    Twitter'da Paylaş
+                </a>
+                <a href="#" class="share-button" onclick="shareOnFacebook()">
+                    <i class="fab fa-facebook"></i>
+                    Facebook'ta Paylaş
+                </a>
+                <a href="#" class="share-button" onclick="copyLink()">
+                    <i class="fas fa-link"></i>
+                    Linki Kopyala
+                </a>
+            </div>
+
+            <!-- Yorum Sistemi -->
+            <section class="comments-section">
+                <h3>Yorumlar</h3>
+                <div id="user-info"></div>
+                
+                <button id="signin-button" onclick="signInWithGoogle()">
+                    <i class="fab fa-google"></i>
+                    Google ile Giriş Yap
+                </button>
+
+                <form id="comment-form" onsubmit="event.preventDefault(); addComment('bolum1');">
+                    <textarea id="comment-text" class="comment-input" placeholder="Yorumunuzu yazın..."></textarea>
+                    <button type="submit" class="comment-submit">Yorum Yap</button>
+                </form>
+
+                <div id="comments-list"></div>
+            </section>
+
+            <div class="chapter-navigation">
+                <a href="#" class="nav-button disabled">← Önceki Bölüm</a>
+                <a href="bolum2.html" class="nav-button">Sonraki Bölüm →</a>
             </div>
         </article>
     </main>
@@ -71,5 +154,34 @@
         </div>
         <p>&copy; 2024 Ateşin Kanatları. Tüm hakları saklıdır.</p>
     </footer>
+
+    <!-- Scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="features.js"></script>
+    <script src="comments.js"></script>
+    <script>
+        // Sayfa yüklendiğinde yorumları yükle
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComments('bolum1');
+        });
+
+        // Paylaşım fonksiyonları
+        function shareOnTwitter() {
+            const text = "Ateşin Kanatları: Küllerden Doğuş - Bölüm 1'i okudum!";
+            const url = window.location.href;
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`);
+        }
+
+        function shareOnFacebook() {
+            const url = window.location.href;
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href)
+                .then(() => alert('Link kopyalandı!'))
+                .catch(err => console.error('Link kopyalama hatası:', err));
+        }
+    </script>
 </body>
 </html> 
