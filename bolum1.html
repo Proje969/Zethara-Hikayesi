@@ -6,10 +6,6 @@
     <title>Bölüm 1: Küllerden Doğuş - Ateşin Kanatları</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-firestore-compat.js"></script>
 </head>
 <body data-chapter-id="bolum1">
     <header class="main-header">
@@ -38,44 +34,6 @@
                 <span class="tag">Fantastik</span>
                 <span class="tag">Giriş</span>
                 <span class="tag">Keşif</span>
-            </div>
-
-            <!-- Bölüm İstatistikleri -->
-            <div class="chapter-stats">
-                <div class="stat-item">
-                    <i class="fas fa-eye"></i>
-                    <span>1.2K Okuma</span>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-heart"></i>
-                    <span id="like-count">0 Beğeni</span>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-comment"></i>
-                    <span id="comment-count">0 Yorum</span>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-clock"></i>
-                    <span>10 dk Okuma</span>
-                </div>
-            </div>
-
-            <!-- Etkileşim Butonları -->
-            <div class="interaction-buttons">
-                <button id="like-button" onclick="toggleLike('bolum1')" class="action-button">
-                    <i class="fas fa-heart"></i>
-                    Beğen
-                </button>
-                <button id="reading-list-button" onclick="toggleReadingList('bolum1')" class="action-button">
-                    <i class="fas fa-bookmark"></i>
-                    Okuma Listesine Ekle
-                </button>
-                <button id="notification-button" onclick="subscribeToNotifications('bolum1')" class="action-button">
-                    <i class="fas fa-bell"></i>
-                    Bildirimleri Aç
-                </button>
-            </div>
-
             <div class="chapter-text">
                 <p>Sislerin çöktüğü bir şafak vakti, Zethara'nın yerle bir edilmiş topraklarında bir kızıl gün doğmakta. Gökyüzü, alevlerin izleriyle çizilmişçesine parçalanmış bulutlarla dolu. Toprağa karışmış küller, her adımda bir ölüm melodisi gibi çıtlıyor. Bu, kadim bir halkın yeniden doğuş hikayesinin başlangıcı.</p>
 
@@ -142,25 +100,6 @@
                     Linki Kopyala
                 </a>
             </div>
-
-            <!-- Yorum Sistemi -->
-            <section class="comments-section">
-                <h3>Yorumlar</h3>
-                <div id="user-info"></div>
-                
-                <button id="signin-button" onclick="signInWithGoogle()">
-                    <i class="fab fa-google"></i>
-                    Google ile Giriş Yap
-                </button>
-
-                <form id="comment-form" onsubmit="event.preventDefault(); addComment('bolum1');">
-                    <textarea id="comment-text" class="comment-input" placeholder="Yorumunuzu yazın..."></textarea>
-                    <button type="submit" class="comment-submit">Yorum Yap</button>
-                </form>
-
-                <div id="comments-list"></div>
-            </section>
-
             <div class="chapter-navigation">
                 <a href="#" class="nav-button disabled">← Önceki Bölüm</a>
                 <a href="bolum2.html" class="nav-button">Sonraki Bölüm →</a>
@@ -176,16 +115,7 @@
         </div>
         <p>&copy; 2024 Ateşin Kanatları. Tüm hakları saklıdır.</p>
     </footer>
-
-    <!-- Scripts -->
-    <script src="firebase-config.js"></script>
     <script src="features.js"></script>
-    <script src="comments.js"></script>
-    <script>
-        // Sayfa yüklendiğinde yorumları yükle
-        document.addEventListener('DOMContentLoaded', () => {
-            loadComments('bolum1');
-        });
 
         // Paylaşım fonksiyonları
         function shareOnTwitter() {
