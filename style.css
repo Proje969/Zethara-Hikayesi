@@ -1140,4 +1140,72 @@ h3 {
 
 #profile-link:hover::after {
     transform: scaleX(1);
+}
+
+/* Alev Geçiş Animasyonu */
+.flame-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #FF4B2B, #FF416C);
+    z-index: 9999;
+    animation: flameIn 1s ease-in-out forwards;
+    pointer-events: none;
+}
+
+@keyframes flameIn {
+    0% {
+        clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+        opacity: 0;
+    }
+    30% {
+        clip-path: polygon(0 70%, 100% 30%, 100% 100%, 0 100%);
+        opacity: 1;
+    }
+    70% {
+        clip-path: polygon(0 30%, 100% 70%, 100% 100%, 0 100%);
+        opacity: 1;
+    }
+    100% {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        opacity: 0;
+    }
+}
+
+/* Bölüm Geçiş Efektleri */
+.chapter {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.nav-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 75, 43, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.nav-button:hover::before {
+    left: 100%;
 } 

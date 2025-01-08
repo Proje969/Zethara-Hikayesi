@@ -6,10 +6,6 @@
     <title>Bölüm 2: Alev Muhafızları - Ateşin Kanatları</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-firestore-compat.js"></script>
 </head>
 <body>
     <header class="main-header">
@@ -21,9 +17,6 @@
                 <li><a href="karakterler.html">Karakterler</a></li>
                 <li><a href="harita.html">Harita</a></li>
                 <li><a href="index.html#bolumler">Bölümler</a></li>
-                <li id="profile-link" style="display: none;">
-                    <a href="profil.html">Profilim</a>
-                </li>
             </ul>
         </nav>
     </header>
@@ -31,60 +24,64 @@
     <main class="chapter-content">
         <article class="chapter">
             <h1>Bölüm 2: Alev Muhafızları</h1>
-            <div class="chapter-meta">
-                <span class="chapter-number">Bölüm 2</span>
-                <span class="reading-time">Okuma Süresi: 20 dakika</span>
-            </div>
             
             <div class="chapter-text">
-                <p>Sislerin çöktüğü bir şafak vakti, Zethara'nın yerle bir edilmiş topraklarında bir kızıl gün doğmakta. Gökyüzü, alevlerin izleriyle çizilmişçesine parçalanmış bulutlarla dolu. Toprağa karışmış küller, her adımda bir ölüm melodisi gibi çıtlıyor. Bu, kadim bir halkın yeniden doğuş hikayesinin başlangıcı.</p>
+                <p>Gökyüzünde süzülen kara bulutlar, bir felaketin yaklaştığını haber veriyordu. Zethara ormanının derinliklerinde, Ateş Kraliçesi'nin unutuşula kaplanmış harabelerinde, sessizlik gümümş bir sis gibi dolaşıyordu. Ancak sessizlik, öncesinde yaklaşan bir fırtınanın habercisiydi.</p>
 
                 <div class="character-section">
                     <h2>Kael'in Düşünceleri</h2>
-                    <p>Kael, elindeki asasından yükselen sönmeyen ateşe baktı. Ateşin dans eden kıvılcımları, onu Zethara'nın tarihindeki trajediler ve kahramanlıkları düşünmeye itti. "Bu yerde ya umut bulacağız ya da tamamen kaybolacağız," dedi, sesi grubun dikkatini çekmek için yeterince gürültülü ama kaygısını saklayamayacak kadar yumuşaktı.</p>
+                    <p>Kael, elindeki asasından yükselen sönmeyen ateşe baktı. Ateşin dans eden kıvılcımları, onu Zethara'nın tarihindeki trajediler ve kahramanlıkları düşünmeye itti.</p>
+                    
+                    <div class="dialogue">
+                        <p class="quote">"Bu yerde ya umut bulacağız ya da tamamen kaybolacağız." - Kael</p>
+                    </div>
                 </div>
 
                 <div class="character-section">
                     <h2>Aera'nın Desteği</h2>
-                    <p>Aera, Kael'in yanına geldi ve omzuna elini koydu. İfadesi ciddiydi ama gözleri, grubunun morali için bir ışık olmaya çalışır gibiydi. "Korkularımızla yüzleşeceğimizı biliyoruz, ama biz bu yolculuğu korktuğumuz için değil, önüne geçmek için çıktık," dedi.</p>
+                    <p>Aera, Kael'in yanına geldi ve omzuna elini koydu. İfadesi ciddiydi ama gözleri, grubunun morali için bir ışık olmaya çalışır gibiydi.</p>
+
+                    <div class="dialogue">
+                        <p class="quote">"Korkularımızla yüzleşeceğimizı biliyoruz, ama biz bu yolculuğu korktuğumuz için değil, önüne geçmek için çıktık." - Aera</p>
+                    </div>
                 </div>
 
                 <div class="character-section">
                     <h2>Lirien'in Endişesi</h2>
-                    <p>Grubun gerisinde kalan Lirien, elindeki yayı dikkatlice kontrol ediyordu. Neşeli gülüşmeleri, şimdi ciddiyetle yer değiştirmişti. "Bu sessizlik beni huzursuz ediyor," dedi, sesi sanki ağaçların arasından gelen hafif bir fısıltı gibiydi. "Ama bir düşmanın né zaman saldıracağını kestiremezsin. Her zaman hazırlıklı olmalıyız."</p>
+                    <p>Grubun gerisinde kalan Lirien, elindeki yayı dikkatlice kontrol ediyordu. Neşeli gülüşmeleri, şimdi ciddiyetle yer değiştirmişti.</p>
+
+                    <div class="dialogue">
+                        <p class="quote">"Bu sessizlik beni huzursuz ediyor. Ama bir düşmanın né zaman saldıracağını kestiremezsin. Her zaman hazırlıklı olmalıyız." - Lirien</p>
+                    </div>
                 </div>
 
                 <div class="character-section">
                     <h2>Zethara'nın Görünüşü</h2>
-                    <p>Yılların sessizliğini bozan hafif bir yankı, hepsinin dikkatini eski harabenin merkezine çekti. Parlayan bir kılıçtan akan kan gibi, bir zamanlar ihtişamın simgesi olan bir taht parçasında oturan Zethara'nın ruhu, közlü gözleriyle onlara bakıyordu. "Benimle neden geldiniz?" diye sordu, sesi yıkımın soğuğuyla şefkatin arasında bocalıyor gibiydi.</p>
+                    <p>Yılların sessizliğini bozan hafif bir yankı, hepsinin dikkatini eski harabenin merkezine çekti. Parlayan bir kılıçtan akan kan gibi, bir zamanlar ihtişamın simgesi olan bir taht parçasında oturan Zethara'nın ruhu, közlü gözleriyle onlara bakıyordu.</p>
+
+                    <div class="dialogue">
+                        <p class="quote">"Benimle neden geldiniz?" - Zethara</p>
+                        <p class="quote">"Senin hikayeni ve bu dünyaya olan öfkenin kökenini anlamak için buradayız. Ateş, sadece yok etmez. Aynı zamanda yéni bir hayat yaratır. Seninle bir çözüm bulabiliriz." - Kael</p>
+                    </div>
+                </div>
+
+                <div class="character-section">
+                    <h2>Diyaloglar ve Yüzleşme</h2>
+                    <div class="dialogue">
+                        <p class="quote">"Bu grubun lideriyim. Seni anlama çabasında yolculuğa öncülük ettim. Geçmişin ağırından kurtulmak için bir başlangıç sunabiliriz. Ama bunun için gerçeklere ihtiyacımız var." - Aera</p>
+                        <p class="quote">"Geçmişte yapılan hataların izi bu topraklara kazındı. Eğer bunu anlamaya hazırsanız, size gerçekleri göstereceğim. Ancak bu, basit bir yolculuk değil." - Zethara</p>
+                    </div>
                 </div>
 
                 <p class="chapter-end">Alev Muhafızları, hem Zethara'yı hem de onun kaderini anlamak için bir araya gelmişti. Ancak gerçeklerin ortaya çıkması, sadece bir başlangıç olacaktı. Birlikte, eski dünyaların yarıklarına dalacaklar ve kaderlerini değiştirme savaşlarını vereceklerdi.</p>
+            </div>
 
-                <div class="chapter-navigation">
-                    <a href="bolum1.html" class="nav-button"><i class="fas fa-arrow-left"></i> Önceki Bölüm</a>
-                    <a href="index.html#bolumler" class="nav-button"><i class="fas fa-list"></i> Bölüm Listesi</a>
-                    <a href="bolum3.html" class="nav-button">Sonraki Bölüm <i class="fas fa-arrow-right"></i></a>
-                </div>
+            <div class="chapter-navigation">
+                <a href="bolum1.html" class="nav-button"><i class="fas fa-arrow-left"></i> Önceki Bölüm</a>
+                <a href="index.html#bolumler" class="nav-button"><i class="fas fa-list"></i> Bölüm Listesi</a>
+                <a href="bolum3.html" class="nav-button">Sonraki Bölüm <i class="fas fa-arrow-right"></i></a>
             </div>
         </article>
-
-        <section class="comments-section">
-            <h3>Yorumlar</h3>
-            
-            <div id="signin-container">
-                <button id="signin-button" style="display: none;">
-                    <i class="fab fa-google"></i> Google ile Giriş Yap
-                </button>
-            </div>
-
-            <form id="comment-form" class="comment-form" style="display: none;">
-                <textarea id="comment-text" placeholder="Yorumunuzu yazın..."></textarea>
-                <button type="submit">Yorum Yap</button>
-            </form>
-
-            <div id="comments-container"></div>
-        </section>
     </main>
 
     <footer>
@@ -96,9 +93,26 @@
         <p>&copy; 2024 Ateşin Kanatları. Tüm hakları saklıdır.</p>
     </footer>
 
-    <!-- Scripts -->
-    <script src="firebase-config.js"></script>
-    <script src="comments.js"></script>
-    <script src="features.js"></script>
+    <script>
+        // Bölüm geçiş animasyonu
+        document.querySelectorAll('.nav-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (!this.classList.contains('disabled')) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    
+                    // Alev animasyonu
+                    const flame = document.createElement('div');
+                    flame.className = 'flame-transition';
+                    document.body.appendChild(flame);
+
+                    // Animasyon tamamlandıktan sonra yönlendirme
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 1000);
+                }
+            });
+        });
+    </script>
 </body>
 </html> 

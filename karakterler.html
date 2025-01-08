@@ -6,10 +6,6 @@
     <title>Karakterler - Ateşin Kanatları</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-firestore-compat.js"></script>
 </head>
 <body>
     <header class="main-header">
@@ -21,9 +17,6 @@
                 <li><a href="karakterler.html">Karakterler</a></li>
                 <li><a href="harita.html">Harita</a></li>
                 <li><a href="index.html#bolumler">Bölümler</a></li>
-                <li id="profile-link" style="display: none;">
-                    <a href="profil.html">Profilim</a>
-                </li>
             </ul>
         </nav>
     </header>
@@ -32,90 +25,145 @@
         <h1>Karakterler</h1>
         
         <div class="character-grid">
-            <article class="character-card">
+            <!-- Kael -->
+            <article class="character-card" onclick="openCharacterModal('kael-modal')">
                 <div class="character-image">
-                    <img src="images/kael.jpg" alt="Kael" class="character-img">
+                    <img src="kael.webp" alt="Kael" class="character-img">
                 </div>
                 <h2>Kael</h2>
                 <p class="character-title">Savaşçı Büyücü</p>
-                <p class="character-desc">Zethara'nın kaderini değiştirmeye kararlı genç büyücü. Geçmişin sırlarını çözmeye çalışırken, geleceği şekillendirme yeteneğine sahip.</p>
-                <div class="character-stats">
-                    <span class="stat"><i class="fas fa-fire"></i> Güç: 85</span>
-                    <span class="stat"><i class="fas fa-shield-alt"></i> Savunma: 70</span>
-                    <span class="stat"><i class="fas fa-magic"></i> Büyü: 90</span>
+                <div class="character-preview">
+                    <i class="fas fa-info-circle"></i> Detaylar için tıklayın
                 </div>
             </article>
 
-            <article class="character-card">
+            <!-- Aera -->
+            <article class="character-card" onclick="openCharacterModal('aera-modal')">
                 <div class="character-image">
-                    <img src="images/aera.jpg" alt="Aera" class="character-img">
+                    <img src="area.png" alt="Aera" class="character-img">
                 </div>
                 <h2>Aera</h2>
                 <p class="character-title">Grup Lideri</p>
-                <p class="character-desc">Çelik iradeli lider, grubun umut ışığı. Stratejik zekası ve kararlılığıyla gruba yön veriyor.</p>
-                <div class="character-stats">
-                    <span class="stat"><i class="fas fa-fire"></i> Güç: 75</span>
-                    <span class="stat"><i class="fas fa-shield-alt"></i> Savunma: 85</span>
-                    <span class="stat"><i class="fas fa-brain"></i> Strateji: 95</span>
+                <div class="character-preview">
+                    <i class="fas fa-info-circle"></i> Detaylar için tıklayın
                 </div>
             </article>
 
-            <article class="character-card">
+            <!-- Lirien -->
+            <article class="character-card" onclick="openCharacterModal('lirien-modal')">
                 <div class="character-image">
                     <img src="images/lirien.jpg" alt="Lirien" class="character-img">
                 </div>
                 <h2>Lirien</h2>
                 <p class="character-title">Okçu</p>
-                <p class="character-desc">Grubun en genç üyesi. Neşeli tavrının altında derin bir kararlılık yatıyor.</p>
-                <div class="character-stats">
-                    <span class="stat"><i class="fas fa-bullseye"></i> Nişancılık: 95</span>
-                    <span class="stat"><i class="fas fa-running"></i> Çeviklik: 90</span>
-                    <span class="stat"><i class="fas fa-shield-alt"></i> Savunma: 65</span>
+                <div class="character-preview">
+                    <i class="fas fa-info-circle"></i> Detaylar için tıklayın
                 </div>
             </article>
 
-            <article class="character-card">
+            <!-- Zethara -->
+            <article class="character-card" onclick="openCharacterModal('zethara-modal')">
                 <div class="character-image">
-                    <img src="images/zethara.jpg" alt="Zethara" class="character-img">
+                    <img src="zethara.webp" alt="Zethara" class="character-img">
                 </div>
                 <h2>Zethara</h2>
                 <p class="character-title">Ateş Kraliçesi</p>
-                <p class="character-desc">Yıkım ve umudun tanrıçası. Kalbinde mühürlenmiş eski bir aşkın trajedisini taşıyor.</p>
-                <div class="character-stats">
-                    <span class="stat"><i class="fas fa-fire"></i> Güç: 100</span>
-                    <span class="stat"><i class="fas fa-crown"></i> Liderlik: 95</span>
-                    <span class="stat"><i class="fas fa-magic"></i> Büyü: 100</span>
+                <div class="character-preview">
+                    <i class="fas fa-info-circle"></i> Detaylar için tıklayın
                 </div>
             </article>
 
-            <article class="character-card">
+            <!-- Orlyn -->
+            <article class="character-card" onclick="openCharacterModal('orlyn-modal')">
                 <div class="character-image">
                     <img src="images/orlyn.jpg" alt="Orlyn" class="character-img">
                 </div>
                 <h2>Orlyn</h2>
                 <p class="character-title">Buz Muhafızı</p>
-                <p class="character-desc">Zethara'nın eski düşmanı ve Donmuş Taç'ın efendisi. Soğuk ve kararlı karakteri, geçmişin derin yaralarını taşıyor.</p>
-                <div class="character-stats">
-                    <span class="stat"><i class="fas fa-snowflake"></i> Buz Gücü: 95</span>
-                    <span class="stat"><i class="fas fa-shield-alt"></i> Savunma: 90</span>
-                    <span class="stat"><i class="fas fa-magic"></i> Büyü: 85</span>
+                <div class="character-preview">
+                    <i class="fas fa-info-circle"></i> Detaylar için tıklayın
                 </div>
             </article>
 
-            <article class="character-card">
+            <!-- Ateş Muhafızı -->
+            <article class="character-card" onclick="openCharacterModal('ates-muhafizi-modal')">
                 <div class="character-image">
                     <img src="images/ates-muhafizi.jpg" alt="Ateş Muhafızı" class="character-img">
                 </div>
                 <h2>Ateş Muhafızı</h2>
                 <p class="character-title">Zethara'nın Kalbi'nin Bekçisi</p>
-                <p class="character-desc">Kadim güçlerin koruyucusu. Zethara'nın Kalbi'ni korumakla görevli, bilgelik ve güç sahibi muhafız.</p>
-                <div class="character-stats">
-                    <span class="stat"><i class="fas fa-fire"></i> Güç: 90</span>
-                    <span class="stat"><i class="fas fa-shield-alt"></i> Savunma: 100</span>
-                    <span class="stat"><i class="fas fa-scroll"></i> Bilgelik: 95</span>
+                <div class="character-preview">
+                    <i class="fas fa-info-circle"></i> Detaylar için tıklayın
                 </div>
             </article>
         </div>
+
+        <!-- Karakter Modal Pencereleri -->
+        <!-- Kael Modal -->
+        <div id="kael-modal" class="character-modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeCharacterModal('kael-modal')">&times;</span>
+                <div class="modal-header">
+                    <img src="images/kael.jpg" alt="Kael" class="modal-image">
+                    <div class="modal-title">
+                        <h2>Kael</h2>
+                        <p class="character-title">Savaşçı Büyücü</p>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <p class="character-desc">Zethara'nın kaderini değiştirmeye kararlı genç büyücü. Geçmişin sırlarını çözmeye çalışırken, geleceği şekillendirme yeteneğine sahip.</p>
+                    <div class="character-stats">
+                        <span class="stat"><i class="fas fa-fire"></i> Güç: 85</span>
+                        <span class="stat"><i class="fas fa-shield-alt"></i> Savunma: 70</span>
+                        <span class="stat"><i class="fas fa-magic"></i> Büyü: 90</span>
+                    </div>
+                    <div class="character-details">
+                        <h3>Karakter Özellikleri</h3>
+                        <ul>
+                            <li>Güçlü büyü yetenekleri</li>
+                            <li>Zethara'ya olan derin bağlılığı</li>
+                            <li>Stratejik düşünme yeteneği</li>
+                            <li>Geçmişin sırlarını çözme tutkusu</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Aera Modal -->
+        <div id="aera-modal" class="character-modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeCharacterModal('aera-modal')">&times;</span>
+                <div class="modal-header">
+                    <img src="images/aera.jpg" alt="Aera" class="modal-image">
+                    <div class="modal-title">
+                        <h2>Aera</h2>
+                        <p class="character-title">Grup Lideri</p>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <p class="character-desc">Çelik iradeli lider, grubun umut ışığı. Stratejik zekası ve kararlılığıyla gruba yön veriyor.</p>
+                    <div class="character-stats">
+                        <span class="stat"><i class="fas fa-fire"></i> Güç: 75</span>
+                        <span class="stat"><i class="fas fa-shield-alt"></i> Savunma: 85</span>
+                        <span class="stat"><i class="fas fa-brain"></i> Strateji: 95</span>
+                    </div>
+                    <div class="character-details">
+                        <h3>Karakter Özellikleri</h3>
+                        <ul>
+                            <li>Doğuştan liderlik yeteneği</li>
+                            <li>Güçlü stratejik düşünce</li>
+                            <li>Grubunu koruma içgüdüsü</li>
+                            <li>Kararlı ve cesur yapı</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diğer karakterler için benzer modal yapıları -->
+        <!-- ... -->
+
     </main>
 
     <footer>
@@ -127,25 +175,134 @@
         <p>&copy; 2024 Ateşin Kanatları. Tüm hakları saklıdır.</p>
     </footer>
 
-    <!-- Scripts -->
-    <script src="firebase-config.js"></script>
-    <script src="features.js"></script>
-    <script>
-        // Sayfa yüklendiğinde profil linkini kontrol et
-        document.addEventListener('DOMContentLoaded', () => {
-            const profileLink = document.getElementById('profile-link');
-            
-            if (firebase.auth().currentUser) {
-                profileLink.style.display = 'block';
-            }
+    <style>
+        /* Modal Stilleri */
+        .character-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
 
-            firebase.auth().onAuthStateChanged((user) => {
-                if (user) {
-                    profileLink.style.display = 'block';
-                } else {
-                    profileLink.style.display = 'none';
+        .modal-content {
+            position: relative;
+            background-color: #1a1a1a;
+            margin: 5% auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 87, 34, 0.3);
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 30px;
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #ff5722;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .modal-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .modal-title {
+            flex-grow: 1;
+        }
+
+        .modal-body {
+            padding: 20px;
+            background-color: #2a2a2a;
+            border-radius: 8px;
+        }
+
+        .character-details ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .character-details li {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .character-details li::before {
+            content: "•";
+            color: #ff5722;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Karakter Kartı Güncellemeleri */
+        .character-card {
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .character-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 87, 34, 0.3);
+        }
+
+        .character-preview {
+            margin-top: 10px;
+            color: #ff5722;
+            font-size: 0.9em;
+        }
+    </style>
+
+    <script>
+        function openCharacterModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCharacterModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Modal dışına tıklandığında kapatma
+        window.onclick = function(event) {
+            if (event.target.classList.contains('character-modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // ESC tuşu ile kapatma
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = document.getElementsByClassName('character-modal');
+                for (let modal of modals) {
+                    if (modal.style.display === 'block') {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
                 }
-            });
+            }
         });
     </script>
 </body>
