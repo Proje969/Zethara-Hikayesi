@@ -151,6 +151,117 @@ h2 {
     font-family: 'Cinzel', serif;
 }
 
+.read-more {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.read-more:hover {
+    color: var(--accent-color);
+}
+
+.coming-soon {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--accent-color);
+    font-style: italic;
+}
+
+/* Karakterler Sayfası */
+.characters-content {
+    padding-top: 100px;
+}
+
+.character-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.character-card {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid var(--accent-color);
+    transition: transform 0.3s ease;
+}
+
+.character-card:hover {
+    transform: translateY(-5px);
+}
+
+.character-image {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.character-title {
+    color: var(--accent-color);
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.character-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Bölüm İçerik Sayfası */
+.chapter-content {
+    padding-top: 100px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 100px 2rem 2rem;
+}
+
+.chapter-text {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--accent-color);
+    margin-top: 2rem;
+}
+
+.chapter-text p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.chapter-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--accent-color);
+}
+
+.nav-button {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.nav-button:hover {
+    color: var(--accent-color);
+}
+
+.nav-button.disabled {
+    color: #666;
+    cursor: not-allowed;
+}
+
 footer {
     text-align: center;
     padding: 2rem;
@@ -172,5 +283,9 @@ footer {
 
     .hero h1 {
         font-size: 2.5rem;
+    }
+
+    .chapter-content {
+        padding-top: 150px;
     }
 } 
