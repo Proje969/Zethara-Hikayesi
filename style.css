@@ -47,6 +47,12 @@ nav {
     text-shadow: 0 0 10px rgba(255, 75, 43, 0.3);
 }
 
+.logo a {
+    color: var(--primary-color);
+    text-decoration: none;
+    text-shadow: 0 0 10px rgba(255, 75, 43, 0.3);
+}
+
 nav ul {
     display: flex;
     list-style: none;
@@ -197,12 +203,24 @@ h2 {
 }
 
 .character-image {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     margin: 0 auto 1rem;
     border-radius: 50%;
-    background-color: var(--secondary-color);
-    border: 2px solid var(--primary-color);
+    overflow: hidden;
+    border: 3px solid var(--primary-color);
+    box-shadow: 0 0 15px rgba(255, 75, 43, 0.3);
+}
+
+.character-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.character-card:hover .character-img {
+    transform: scale(1.1);
 }
 
 .character-title {
@@ -288,4 +306,64 @@ footer {
     .chapter-content {
         padding-top: 150px;
     }
+}
+
+.quote {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--accent-color);
+    text-align: center;
+    margin: 2rem 0;
+    padding: 1rem;
+    border-left: 3px solid var(--primary-color);
+    background: rgba(255, 75, 43, 0.1);
+}
+
+.chapter-end {
+    text-align: center;
+    font-style: italic;
+    color: var(--accent-color);
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--accent-color);
+}
+
+.chapter-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    letter-spacing: 0.3px;
+}
+
+.chapter-text p {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+.character-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(255, 75, 43, 0.1);
+    border-radius: 8px;
+    border-left: 3px solid var(--primary-color);
+}
+
+.character-section h2 {
+    color: var(--accent-color);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.character-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+h3 {
+    color: var(--primary-color);
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    margin: 2rem 0 1rem;
+    text-align: center;
 } 
