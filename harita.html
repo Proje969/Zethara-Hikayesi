@@ -6,10 +6,6 @@
     <title>Dünya Haritası - Ateşin Kanatları</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-firestore-compat.js"></script>
 </head>
 <body>
     <header class="main-header">
@@ -21,9 +17,6 @@
                 <li><a href="karakterler.html">Karakterler</a></li>
                 <li><a href="harita.html">Harita</a></li>
                 <li><a href="index.html#bolumler">Bölümler</a></li>
-                <li id="profile-link" style="display: none;">
-                    <a href="profil.html">Profilim</a>
-                </li>
             </ul>
         </nav>
     </header>
@@ -31,91 +24,74 @@
     <main class="map-content">
         <h1>Zethara'nın Dünyası</h1>
         
-        <div class="map-container">
-            <div class="map-image">
+        <div class="world-layout">
+            <!-- Ana Harita Bölümü -->
+            <div class="main-map">
                 <img src="world-map.jpeg" alt="Dünya Haritası" class="world-map">
-                <div class="map-overlay">
-                    <div class="map-point" data-location="ates-diyari" style="top: 48%; left: 50%;">
-                        <i class="fas fa-fire"></i>
-                        <span class="tooltip">Ateş Diyarı</span>
+            </div>
+
+            <!-- Önemli Lokasyonlar -->
+            <div class="locations-grid">
+                <!-- Ateş Diyarı - Ana Lokasyon -->
+                <div class="location-card featured">
+                    <h2><i class="fas fa-fire"></i> Ateş Diyarı</h2>
+                    <p class="location-desc">Zethara'nın hüküm sürdüğü topraklar. Alevlerle çevrili bu volkanik bölge, kadim güçlerin merkezi konumunda. Burada ateş ve külün dansı, yeni bir medeniyetin doğuşuna tanıklık ediyor.</p>
+                    <div class="location-features">
+                        <span class="feature"><i class="fas fa-thermometer-full"></i> Sıcaklık: Aşırı</span>
+                        <span class="feature"><i class="fas fa-mountain"></i> Arazi: Volkanik</span>
+                        <span class="feature"><i class="fas fa-skull"></i> Tehlike: Yüksek</span>
                     </div>
-                    <div class="map-point" data-location="kristal-zirve" style="top: 30%; left: 70%;">
-                        <i class="fas fa-mountain"></i>
-                        <span class="tooltip">Kristal Zirve</span>
+                </div>
+
+                <!-- Diğer Önemli Lokasyonlar -->
+                <div class="location-grid">
+                    <!-- Kristal Zirve -->
+                    <div class="location-card">
+                        <h3><i class="fas fa-mountain"></i> Kristal Zirve</h3>
+                        <p>Kadim sırların saklandığı, yüksek dağların zirvesindeki kutsal mekan. Kristal Efsun'un gücünün kaynağı burada gizli.</p>
+                        <div class="location-stats">
+                            <span class="stat">Yükseklik: Ekstrem</span>
+                            <span class="stat">Mistik Güç: Yüksek</span>
+                        </div>
                     </div>
-                    <div class="map-point" data-location="kizil-tilsim" style="top: 65%; left: 30%;">
-                        <i class="fas fa-tree"></i>
-                        <span class="tooltip">Kızıl Tılsım Ormanları</span>
+
+                    <!-- Kızıl Tılsım Ormanları -->
+                    <div class="location-card">
+                        <h3><i class="fas fa-tree"></i> Kızıl Tılsım Ormanları</h3>
+                        <p>Büyülü enerjinin yoğun olduğu, gizemli ormanlar. Zethara'nın Kalbi'nin gizlendiği kutsal mekan.</p>
+                        <div class="location-stats">
+                            <span class="stat">Büyü Yoğunluğu: Çok Yüksek</span>
+                            <span class="stat">Keşif Zorluğu: Ekstrem</span>
+                        </div>
                     </div>
-                    <div class="map-point" data-location="donmus-tac" style="top: 25%; left: 20%;">
-                        <i class="fas fa-snowflake"></i>
-                        <span class="tooltip">Donmuş Taç</span>
-                    </div>
-                    <div class="map-point" data-location="golge-ormani" style="top: 75%; left: 60%;">
-                        <i class="fas fa-ghost"></i>
-                        <span class="tooltip">Gölge Ormanı</span>
-                    </div>
-                    <div class="map-point" data-location="efsun-magarasi" style="top: 45%; left: 80%;">
-                        <i class="fas fa-dungeon"></i>
-                        <span class="tooltip">Efsun Mağarası</span>
+
+                    <!-- Donmuş Taç -->
+                    <div class="location-card">
+                        <h3><i class="fas fa-snowflake"></i> Donmuş Taç</h3>
+                        <p>Orlyn'in kalesi. Lav denizinin ortasında yükselen, buzla kaplı devasa yapı. Ateş ve buzun çatışmasının simgesi.</p>
+                        <div class="location-stats">
+                            <span class="stat">Savunma: Çok Yüksek</span>
+                            <span class="stat">Stratejik Önem: Kritik</span>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="map-locations">
-                <article class="location-card" id="ates-diyari">
-                    <h2><i class="fas fa-fire"></i> Ateş Diyarı</h2>
-                    <p>Zethara'nın hüküm sürdüğü topraklar. Alevlerle çevrili, volkanik bir bölge.</p>
-                    <div class="location-stats">
-                        <span class="stat"><i class="fas fa-thermometer-full"></i> Sıcaklık: Aşırı</span>
-                        <span class="stat"><i class="fas fa-skull"></i> Tehlike: Yüksek</span>
-                    </div>
-                </article>
-
-                <article class="location-card" id="kristal-zirve">
-                    <h2><i class="fas fa-mountain"></i> Kristal Zirve</h2>
-                    <p>Kadim sırların saklandığı, yüksek dağların zirvesindeki kutsal mekan.</p>
-                    <div class="location-stats">
-                        <span class="stat"><i class="fas fa-thermometer-empty"></i> Sıcaklık: Düşük</span>
-                        <span class="stat"><i class="fas fa-skull"></i> Tehlike: Orta</span>
-                    </div>
-                </article>
-
-                <article class="location-card" id="kizil-tilsim">
-                    <h2><i class="fas fa-tree"></i> Kızıl Tılsım Ormanları</h2>
-                    <p>Büyülü enerjinin yoğun olduğu, gizemli ormanlar. Zethara'nın Kalbi'nin gizlendiği yer.</p>
-                    <div class="location-stats">
-                        <span class="stat"><i class="fas fa-magic"></i> Büyü: Yoğun</span>
-                        <span class="stat"><i class="fas fa-skull"></i> Tehlike: Çok Yüksek</span>
-                    </div>
-                </article>
-
-                <article class="location-card" id="donmus-tac">
-                    <h2><i class="fas fa-snowflake"></i> Donmuş Taç</h2>
-                    <p>Orlyn'in kalesi. Lav denizinin ortasında yükselen, buzla kaplı devasa yapı.</p>
-                    <div class="location-stats">
-                        <span class="stat"><i class="fas fa-thermometer-empty"></i> Sıcaklık: Çok Düşük</span>
-                        <span class="stat"><i class="fas fa-skull"></i> Tehlike: Çok Yüksek</span>
-                    </div>
-                </article>
-
-                <article class="location-card" id="golge-ormani">
-                    <h2><i class="fas fa-ghost"></i> Gölge Ormanı</h2>
-                    <p>Karanlık sırların ve tehlikelerin gizlendiği, lanetli orman.</p>
-                    <div class="location-stats">
-                        <span class="stat"><i class="fas fa-cloud"></i> Görüş: Çok Düşük</span>
-                        <span class="stat"><i class="fas fa-skull"></i> Tehlike: Yüksek</span>
-                    </div>
-                </article>
-
-                <article class="location-card" id="efsun-magarasi">
-                    <h2><i class="fas fa-dungeon"></i> Efsun Mağarası</h2>
-                    <p>Kristal Efsun'un saklandığı, kadim mağara sistemi.</p>
-                    <div class="location-stats">
-                        <span class="stat"><i class="fas fa-magic"></i> Büyü: Çok Yoğun</span>
-                        <span class="stat"><i class="fas fa-skull"></i> Tehlike: Orta</span>
-                    </div>
-                </article>
+        <!-- Lokasyon Detayları -->
+        <div class="location-details">
+            <div class="detail-section">
+                <h2>Stratejik Noktalar</h2>
+                <ul class="strategic-points">
+                    <li>
+                        <h4>Efsun Mağarası</h4>
+                        <p>Kristal Efsun'un saklandığı kadim mağara sistemi. Büyülü bariyerler ve antik tuzaklarla korunuyor.</p>
+                    </li>
+                    <li>
+                        <h4>Gölge Ormanı</h4>
+                        <p>Karanlık sırların ve tehlikelerin gizlendiği lanetli orman. Çok az kaşif buradan sağ çıkabilmiş.</p>
+                    </li>
+                </ul>
             </div>
         </div>
     </main>
@@ -129,42 +105,125 @@
         <p>&copy; 2024 Ateşin Kanatları. Tüm hakları saklıdır.</p>
     </footer>
 
-    <!-- Scripts -->
-    <script src="firebase-config.js"></script>
-    <script src="features.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Profil linkini kontrol et
-            const profileLink = document.getElementById('profile-link');
-            
-            if (firebase.auth().currentUser) {
-                profileLink.style.display = 'block';
+    <style>
+        .world-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .main-map {
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(255, 87, 34, 0.3);
+        }
+
+        .world-map {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 15px;
+        }
+
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .location-card {
+            background-color: rgba(26, 26, 26, 0.9);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .location-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 87, 34, 0.2);
+        }
+
+        .location-card.featured {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #1a1a1a, #2d1f1f);
+            border: 1px solid #ff5722;
+        }
+
+        .location-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .feature {
+            background-color: rgba(255, 87, 34, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .location-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .stat {
+            font-size: 0.9rem;
+            color: #ff5722;
+        }
+
+        .location-details {
+            width: 100%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .strategic-points {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .strategic-points li {
+            background-color: rgba(26, 26, 26, 0.9);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1, h2, h3, h4 {
+            color: #ff5722;
+            margin-bottom: 1rem;
+        }
+
+        .location-desc {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .locations-grid {
+                grid-template-columns: 1fr;
             }
 
-            firebase.auth().onAuthStateChanged((user) => {
-                if (user) {
-                    profileLink.style.display = 'block';
-                } else {
-                    profileLink.style.display = 'none';
-                }
-            });
-
-            // Harita noktalarına tıklama olayları ekle
-            const mapPoints = document.querySelectorAll('.map-point');
-            mapPoints.forEach(point => {
-                point.addEventListener('click', () => {
-                    const locationId = point.dataset.location;
-                    const locationCard = document.getElementById(locationId);
-                    if (locationCard) {
-                        locationCard.scrollIntoView({ behavior: 'smooth' });
-                        locationCard.classList.add('highlight');
-                        setTimeout(() => {
-                            locationCard.classList.remove('highlight');
-                        }, 2000);
-                    }
-                });
-            });
-        });
-    </script>
+            .strategic-points {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </body>
 </html> 
