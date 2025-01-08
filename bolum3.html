@@ -6,6 +6,10 @@
     <title>Bölüm 3: Kristal Efsun - Ateşin Kanatları</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-firestore-compat.js"></script>
 </head>
 <body>
     <header class="main-header">
@@ -15,57 +19,51 @@
                 <li><a href="index.html">Ana Sayfa</a></li>
                 <li><a href="index.html#hikaye">Hikaye</a></li>
                 <li><a href="karakterler.html">Karakterler</a></li>
+                <li><a href="harita.html">Harita</a></li>
                 <li><a href="index.html#bolumler">Bölümler</a></li>
+                <li id="profile-link" style="display: none;">
+                    <a href="profil.html">Profilim</a>
+                </li>
             </ul>
         </nav>
     </header>
 
     <main class="chapter-content">
-        <article>
+        <article class="chapter">
             <h1>Bölüm 3: Kristal Efsun</h1>
+            <div class="chapter-meta">
+                <span class="chapter-number">Bölüm 3</span>
+                <span class="reading-time">Okuma Süresi: 18 dakika</span>
+            </div>
+            
             <div class="chapter-text">
-                <p>Zethara'nın yüksek kulelerinde, gökyüzü gri bulutlarla kaplıyken, Kael bir kez daha kadim metinleri inceliyordu. Kitabın sayfaları, şaşırtıcı bir sıcaklıkla parıldıyor ve üzerindeki semboller hareket ediyormuş gibi hissediliyordu. Gözlerini satırlardan ayıramazken, Aera'nın kararlı sesi odanın sessizliğini bozdu.</p>
+                <!-- Bölüm içeriği buraya gelecek -->
+                <p>Bölüm metni...</p>
+            </div>
 
-                <div class="character-section">
-                    <h2>Araştırma ve Keşif</h2>
-                    <p>"Kael, yeterince dinlendin. Grup seni bekliyor," dedi Aera, kollarını göğsünde kavuşturarak. Yüzü her zamanki gibi ciddiydi, ancak gözlerinde endişe izleri vardi.</p>
-                    
-                    <p>Kael başını kaldırıp liderlerine baktı. "Bu kitabın içindeki bilgiler, Zethara'nı kurtarma anahtarı olabilir. Kristal Efsun'dan bahsediyor. Ama bunu anlamamız için daha fazlasına ihtiyacımız var."</p>
-                </div>
-
-                <div class="character-section">
-                    <h2>Grup Dinamikleri</h2>
-                    <p>Lirien, bir anda kapıdan ışıldayarak girdi. Elinde bir yayı, sırtında dolu bir ok kılıfı vardı. "Büyük planın nedir, Kael? Kitapları okuyup düşmanları mı yenmeyi planlıyorsun?"</p>
-
-                    <p>Aera, Lirien'e sert bir bakış attı. "Lirien, hepimizin katkısı önemli. Kael olmadan bu savaşı kazanamayacağımız."</p>
-                </div>
-
-                <p>Kael, liderlerinin desteğinden cesaret alarak ayağa kalktı. "Kristal Efsun bir silah değil. Zethara'nı ve Ateş Kraliçesi'ni kurtarabilecek bir mühür. Ama Efsun'u kullanmak için Gölge Ormanı'nı geçip Efsun Mağarası'na ulaşmalıyız."</p>
-
-                <h3>Gölge Ormanı'nda</h3>
-                <p>Grup, karanlık ve sisli ormana adım attığında sessizlik bozuldu. Lirien, etrafı dikkatle izliyor, Kael ise elleriyle bir büyüyü şekillendirerek görüşlerini arttırmaya çalışıyordu.</p>
-
-                <p class="quote">"Bu yerin enerjisi... garip," dedi Kael, alçak bir sesle.</p>
-
-                <p>"Garip mi? Daha doğrusu ölüm kokuyor," diye karşılık verdi Lirien. Ancak sesi neşeli olmaktan uzaktı.</p>
-
-                <p>Bir anda, ormanın derinliklerinden gelen bir fıştırı sesi herkesi alarma geçirdi. Aera, grubun etrafında daire çizerek "Savunma pozisyonu alın!" diye emretti.</p>
-
-                <div class="character-section">
-                    <h2>Çatışma</h2>
-                    <p>Bir gölge figürü, sislerin arasından belirdi. Karanlıktan bir canavar, büyük pençeleri ve parlayan gözleriyle gruba yaklaşıyordu.</p>
-
-                    <p>"Hep birlikte!" diye bağırdı Kael. Ellerinden çıkan büyüyü, canavarın üzerine ışıldayan bir şimşek olarak saldı. Aera ve Lirien, yaratığa karşı büyük bir koordinasyonla savaştılar.</p>
-                </div>
-
-                <p class="chapter-end">Böylece grup, Gölge Ormanı'nın derinliklerine doğru ilerlemeye devam etti. Onların farkında olmadıkları şey ise, Kristal Efsun'un bekçisinin onlara şimdiden gözlerini dikmiş olduğuydu.</p>
-
-                <div class="chapter-navigation">
-                    <a href="bolum2.html" class="nav-button">← Önceki Bölüm</a>
-                    <a href="bolum4.html" class="nav-button">Sonraki Bölüm →</a>
-                </div>
+            <div class="chapter-navigation">
+                <a href="bolum2.html" class="nav-button"><i class="fas fa-arrow-left"></i> Önceki Bölüm</a>
+                <a href="index.html#bolumler" class="nav-button"><i class="fas fa-list"></i> Bölüm Listesi</a>
+                <a href="bolum4.html" class="nav-button">Sonraki Bölüm <i class="fas fa-arrow-right"></i></a>
             </div>
         </article>
+
+        <section class="comments-section">
+            <h3>Yorumlar</h3>
+            
+            <div id="signin-container">
+                <button id="signin-button" style="display: none;">
+                    <i class="fab fa-google"></i> Google ile Giriş Yap
+                </button>
+            </div>
+
+            <form id="comment-form" class="comment-form" style="display: none;">
+                <textarea id="comment-text" placeholder="Yorumunuzu yazın..."></textarea>
+                <button type="submit">Yorum Yap</button>
+            </form>
+
+            <div id="comments-container"></div>
+        </section>
     </main>
 
     <footer>
@@ -76,5 +74,10 @@
         </div>
         <p>&copy; 2024 Ateşin Kanatları. Tüm hakları saklıdır.</p>
     </footer>
+
+    <!-- Scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="comments.js"></script>
+    <script src="features.js"></script>
 </body>
 </html> 

@@ -1,23 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Örnek hikaye bölümleri
-    const chapters = [
-        {
-            title: 'Bölüm 1: Küllerden Doğuş',
-            preview: 'Zethara\'nın hikayesi başlıyor...',
-            status: 'yakında'
-        },
-        {
-            title: 'Bölüm 2: Alev Muhafızları',
-            preview: 'İsyanın tohumları ekiliyor...',
-            status: 'yakında'
-        },
-        {
-            title: 'Bölüm 3: Kristal Efsun',
-            preview: 'Kadim sırlar açığa çıkıyor...',
-            status: 'yakında'
-        }
-    ];
-
     const chaptersGrid = document.querySelector('.chapters-grid');
     
     // Bölümleri dinamik olarak oluştur

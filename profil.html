@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilim - Ateşin Kanatları</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <nav>
+            <div class="logo"><a href="index.html">Ateşin Kanatları</a></div>
+            <ul>
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="index.html#hikaye">Hikaye</a></li>
+                <li><a href="karakterler.html">Karakterler</a></li>
+                <li><a href="harita.html">Harita</a></li>
+                <li><a href="index.html#bolumler">Bölümler</a></li>
+                <li id="profile-link" style="display: none;">
+                    <a href="profil.html">Profilim</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="profile-content">
+        <section class="profile-header">
+            <div class="profile-info">
+                <img src="" alt="Profil Fotoğrafı" class="profile-image">
+                <h1 class="profile-name"></h1>
+            </div>
+            <div class="profile-stats">
+                <div class="stat">
+                    <i class="fas fa-book-reader"></i>
+                    <span>Okunan Bölümler</span>
+                    <span class="stat-value" id="chapters-read">0/5</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-comment"></i>
+                    <span>Yorumlar</span>
+                    <span class="stat-value" id="comment-count">0</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-heart"></i>
+                    <span>Beğeniler</span>
+                    <span class="stat-value" id="like-count">0</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-progress">
+            <h2>Okuma İlerlemesi</h2>
+            <div class="progress-bar-container">
+                <div class="progress-bar">
+                    <div class="progress" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <span class="progress-text">%0 tamamlandı</span>
+            </div>
+            <div class="chapter-list">
+                <h3>Bölümler</h3>
+                <div class="chapter-grid">
+                    <div class="chapter-card" data-chapter="bolum1">
+                        <h4>Bölüm 1: Küllerden Doğuş</h4>
+                        <span class="status">Okunmadı</span>
+                    </div>
+                    <div class="chapter-card" data-chapter="bolum2">
+                        <h4>Bölüm 2: Alev Muhafızları</h4>
+                        <span class="status">Okunmadı</span>
+                    </div>
+                    <div class="chapter-card" data-chapter="bolum3">
+                        <h4>Bölüm 3: Kristal Efsun</h4>
+                        <span class="status">Okunmadı</span>
+                    </div>
+                    <div class="chapter-card" data-chapter="bolum4">
+                        <h4>Bölüm 4: Zethara'nın Kalbi</h4>
+                        <span class="status">Okunmadı</span>
+                    </div>
+                    <div class="chapter-card" data-chapter="bolum5">
+                        <h4>Bölüm 5: Ateş ve Buz</h4>
+                        <span class="status">Okunmadı</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-activity">
+            <h2>Son Aktiviteler</h2>
+            <div class="activity-list" id="activity-container">
+                <!-- Aktiviteler buraya dinamik olarak eklenecek -->
+            </div>
+        </section>
+
+        <section class="profile-settings">
+            <h2>Profil Ayarları</h2>
+            <form id="profile-form">
+                <div class="form-group">
+                    <label for="display-name">Görünen Ad</label>
+                    <input type="text" id="display-name" name="display-name">
+                </div>
+                <div class="form-group">
+                    <label for="bio">Hakkımda</label>
+                    <textarea id="bio" name="bio"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="notifications" name="notifications">
+                        Yeni bölüm bildirimleri almak istiyorum
+                    </label>
+                </div>
+                <button type="submit" class="save-button">Kaydet</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-media">
+            <a href="https://x.com/ZetharaOfficial" target="_blank" class="social-icon">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+        <p>&copy; 2024 Ateşin Kanatları. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="features.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const auth = firebase.auth();
+            const db = firebase.firestore();
+
+            // Kullanıcı oturum durumunu kontrol et
+            auth.onAuthStateChanged(async (user) => {
+                if (!user) {
+                    window.location.href = 'index.html';
+                    return;
+                }
+
+                // Kullanıcı verilerini yükle
+                const userDoc = await db.collection('users').doc(user.uid).get();
+                if (userDoc.exists) {
+                    const userData = userDoc.data();
+                    updateProfileUI(userData);
+                    loadUserActivity(user.uid);
+                }
+            });
+
+            // Profil formunu gönderme
+            document.getElementById('profile-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const displayName = document.getElementById('display-name').value;
+                const bio = document.getElementById('bio').value;
+                const notifications = document.getElementById('notifications').checked;
+
+                try {
+                    await db.collection('users').doc(auth.currentUser.uid).update({
+                        displayName,
+                        bio,
+                        notifications,
+                        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+
+                    alert('Profil güncellendi!');
+                } catch (error) {
+                    console.error('Profil güncelleme hatası:', error);
+                    alert('Profil güncellenirken bir hata oluştu.');
+                }
+            });
+        });
+
+        // Profil arayüzünü güncelle
+        function updateProfileUI(userData) {
+            document.querySelector('.profile-name').textContent = userData.displayName;
+            document.querySelector('.profile-image').src = userData.photoURL || 'images/default-avatar.jpg';
+            
+            document.getElementById('display-name').value = userData.displayName || '';
+            document.getElementById('bio').value = userData.bio || '';
+            document.getElementById('notifications').checked = userData.notifications || false;
+
+            // Okuma istatistiklerini güncelle
+            const readingList = userData.readingList || [];
+            document.getElementById('chapters-read').textContent = `${readingList.length}/5`;
+            
+            // İlerleme çubuğunu güncelle
+            const progress = (readingList.length / 5) * 100;
+            const progressBar = document.querySelector('.progress');
+            progressBar.style.width = `${progress}%`;
+            progressBar.setAttribute('aria-valuenow', progress);
+            document.querySelector('.progress-text').textContent = `%${progress} tamamlandı`;
+
+            // Bölüm durumlarını güncelle
+            readingList.forEach(chapter => {
+                const chapterCard = document.querySelector(`[data-chapter="${chapter}"]`);
+                if (chapterCard) {
+                    chapterCard.querySelector('.status').textContent = 'Okundu';
+                    chapterCard.classList.add('read');
+                }
+            });
+        }
+
+        // Kullanıcı aktivitelerini yükle
+        async function loadUserActivity(userId) {
+            const activityContainer = document.getElementById('activity-container');
+            activityContainer.innerHTML = '';
+
+            try {
+                // Son yorumları yükle
+                const comments = await db.collection('comments')
+                    .where('userId', '==', userId)
+                    .orderBy('timestamp', 'desc')
+                    .limit(5)
+                    .get();
+
+                comments.forEach(doc => {
+                    const comment = doc.data();
+                    const activityElement = document.createElement('div');
+                    activityElement.className = 'activity-item';
+                    activityElement.innerHTML = `
+                        <i class="fas fa-comment"></i>
+                        <div class="activity-content">
+                            <p>${comment.text}</p>
+                            <span class="activity-meta">
+                                ${formatDate(comment.timestamp)} tarihinde yorum yaptınız
+                            </span>
+                        </div>
+                    `;
+                    activityContainer.appendChild(activityElement);
+                });
+
+                // Beğenileri yükle
+                const likes = await db.collection('likes')
+                    .where('userId', '==', userId)
+                    .orderBy('timestamp', 'desc')
+                    .limit(5)
+                    .get();
+
+                likes.forEach(doc => {
+                    const like = doc.data();
+                    const activityElement = document.createElement('div');
+                    activityElement.className = 'activity-item';
+                    activityElement.innerHTML = `
+                        <i class="fas fa-heart"></i>
+                        <div class="activity-content">
+                            <span class="activity-meta">
+                                ${formatDate(like.timestamp)} tarihinde bir yorumu beğendiniz
+                            </span>
+                        </div>
+                    `;
+                    activityContainer.appendChild(activityElement);
+                });
+            } catch (error) {
+                console.error('Aktivite yükleme hatası:', error);
+                activityContainer.innerHTML = '<p class="error">Aktiviteler yüklenirken bir hata oluştu.</p>';
+            }
+        }
+
+        // Tarih formatla
+        function formatDate(timestamp) {
+            if (!timestamp) return 'Bilinmeyen tarih';
+            
+            const date = timestamp.toDate();
+            return new Intl.DateTimeFormat('tr-TR', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            }).format(date);
+        }
+    </script>
+</body>
+</html> 

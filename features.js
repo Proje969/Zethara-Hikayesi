@@ -1,167 +1,151 @@
-// Beğeni Sistemi
-async function toggleLike(chapterId) {
-    if (!auth.currentUser) {
-        alert('Beğenmek için giriş yapmalısınız.');
-        return;
+// Özellikler sınıfı
+class Features {
+    constructor() {
+        this.db = firebase.firestore();
+        this.auth = firebase.auth();
+        this.currentChapter = window.location.pathname.split('/').pop().replace('.html', '');
+        
+        this.setupEventListeners();
+        this.initializeFeatures();
     }
 
-    const userId = auth.currentUser.uid;
-    const likeRef = db.collection('likes').doc(`${chapterId}_${userId}`);
-    const chapterRef = db.collection('chapters').doc(chapterId);
-
-    try {
-        const likeDoc = await likeRef.get();
-        
-        await db.runTransaction(async (transaction) => {
-            const chapterDoc = await transaction.get(chapterRef);
-            const currentLikes = chapterDoc.data()?.likes || 0;
-
-            if (likeDoc.exists) {
-                // Beğeniyi kaldır
-                transaction.delete(likeRef);
-                transaction.update(chapterRef, { likes: currentLikes - 1 });
-                document.getElementById('like-button').classList.remove('liked');
-            } else {
-                // Beğeni ekle
-                transaction.set(likeRef, { 
-                    userId,
-                    chapterId,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                });
-                transaction.update(chapterRef, { likes: currentLikes + 1 });
-                document.getElementById('like-button').classList.add('liked');
+    setupEventListeners() {
+        // Oturum durumu değişikliğini dinle
+        this.auth.onAuthStateChanged((user) => {
+            this.updateUI(user);
+            if (user) {
+                this.loadUserData();
             }
         });
-
-        updateLikeCount(chapterId);
-    } catch (error) {
-        console.error('Beğeni hatası:', error);
-    }
-}
-
-// Beğeni sayısını güncelle
-async function updateLikeCount(chapterId) {
-    try {
-        const chapterDoc = await db.collection('chapters').doc(chapterId).get();
-        const likeCount = chapterDoc.data()?.likes || 0;
-        document.getElementById('like-count').textContent = likeCount;
-    } catch (error) {
-        console.error('Beğeni sayısı güncelleme hatası:', error);
-    }
-}
-
-// Kullanıcının beğeni durumunu kontrol et
-async function checkUserLike(chapterId) {
-    if (!auth.currentUser) return;
-
-    try {
-        const likeDoc = await db.collection('likes')
-            .doc(`${chapterId}_${auth.currentUser.uid}`)
-            .get();
-
-        if (likeDoc.exists) {
-            document.getElementById('like-button').classList.add('liked');
-        }
-    } catch (error) {
-        console.error('Beğeni kontrolü hatası:', error);
-    }
-}
-
-// Okuma Listesi
-async function toggleReadingList(chapterId) {
-    if (!auth.currentUser) {
-        alert('Okuma listesine eklemek için giriş yapmalısınız.');
-        return;
     }
 
-    const userId = auth.currentUser.uid;
-    const userRef = db.collection('users').doc(userId);
-
-    try {
-        const userDoc = await userRef.get();
-        const readingList = userDoc.data()?.readingList || [];
+    async initializeFeatures() {
+        // Okuma süresi hesaplama
+        this.calculateReadingTime();
         
-        if (readingList.includes(chapterId)) {
-            // Listeden çıkar
-            await userRef.update({
-                readingList: firebase.firestore.FieldValue.arrayRemove(chapterId)
-            });
-            document.getElementById('reading-list-button').classList.remove('added');
-        } else {
-            // Listeye ekle
-            await userRef.update({
-                readingList: firebase.firestore.FieldValue.arrayUnion(chapterId)
-            });
-            document.getElementById('reading-list-button').classList.add('added');
+        // Okuma listesi kontrolü
+        if (this.auth.currentUser) {
+            await this.checkReadingList();
         }
-    } catch (error) {
-        console.error('Okuma listesi hatası:', error);
     }
-}
 
-// Okuma listesi durumunu kontrol et
-async function checkReadingList(chapterId) {
-    if (!auth.currentUser) return;
-
-    try {
-        const userDoc = await db.collection('users')
-            .doc(auth.currentUser.uid)
-            .get();
-
-        const readingList = userDoc.data()?.readingList || [];
-        if (readingList.includes(chapterId)) {
-            document.getElementById('reading-list-button').classList.add('added');
+    calculateReadingTime() {
+        const chapterText = document.querySelector('.chapter-text');
+        if (chapterText) {
+            const words = chapterText.textContent.trim().split(/\s+/).length;
+            const minutes = Math.ceil(words / 200); // Ortalama okuma hızı: dakikada 200 kelime
+            
+            const readingTime = document.querySelector('.reading-time');
+            if (readingTime) {
+                readingTime.textContent = `Okuma Süresi: ${minutes} dakika`;
+            }
         }
-    } catch (error) {
-        console.error('Okuma listesi kontrolü hatası:', error);
-    }
-}
-
-// Okuyucu Profili
-async function updateUserProfile(displayName, bio) {
-    if (!auth.currentUser) return;
-
-    try {
-        await db.collection('users').doc(auth.currentUser.uid).update({
-            displayName,
-            bio,
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-
-        alert('Profil güncellendi!');
-    } catch (error) {
-        console.error('Profil güncelleme hatası:', error);
-    }
-}
-
-// Bildirim Sistemi
-async function subscribeToNotifications(chapterId) {
-    if (!auth.currentUser) {
-        alert('Bildirimleri açmak için giriş yapmalısınız.');
-        return;
     }
 
-    try {
-        await requestNotificationPermission();
+    async checkReadingList() {
+        if (!this.auth.currentUser) return;
+
+        try {
+            const userRef = this.db.collection('users').doc(this.auth.currentUser.uid);
+            const doc = await userRef.get();
+            
+            if (doc.exists) {
+                const readingList = doc.data().readingList || [];
+                if (readingList.includes(this.currentChapter)) {
+                    // Bölüm okunmuş olarak işaretlendi
+                    this.markAsRead();
+                }
+            }
+        } catch (error) {
+            console.error('Okuma listesi kontrolü hatası:', error);
+        }
+    }
+
+    async markAsRead() {
+        if (!this.auth.currentUser) return;
+
+        try {
+            const userRef = this.db.collection('users').doc(this.auth.currentUser.uid);
+            await userRef.update({
+                readingList: firebase.firestore.FieldValue.arrayUnion(this.currentChapter)
+            });
+
+            // UI güncelleme
+            const readButton = document.querySelector('.mark-as-read');
+            if (readButton) {
+                readButton.classList.add('read');
+                readButton.innerHTML = '<i class="fas fa-check"></i> Okundu';
+            }
+        } catch (error) {
+            console.error('Okundu işaretleme hatası:', error);
+        }
+    }
+
+    updateUI(user) {
+        const profileLink = document.getElementById('profile-link');
+        if (profileLink) {
+            profileLink.style.display = user ? 'block' : 'none';
+        }
+
+        // Diğer UI güncellemeleri
+        this.updateReadingProgress(user);
+    }
+
+    async updateReadingProgress(user) {
+        if (!user) return;
+
+        try {
+            const userRef = this.db.collection('users').doc(user.uid);
+            const doc = await userRef.get();
+            
+            if (doc.exists) {
+                const readingList = doc.data().readingList || [];
+                const totalChapters = 5; // Toplam bölüm sayısı
+                const progress = (readingList.length / totalChapters) * 100;
+
+                // İlerleme çubuğunu güncelle
+                const progressBar = document.querySelector('.reading-progress');
+                if (progressBar) {
+                    progressBar.style.width = `${progress}%`;
+                    progressBar.setAttribute('aria-valuenow', progress);
+                }
+            }
+        } catch (error) {
+            console.error('İlerleme güncelleme hatası:', error);
+        }
+    }
+
+    async loadUserData() {
+        if (!this.auth.currentUser) return;
+
+        try {
+            const userRef = this.db.collection('users').doc(this.auth.currentUser.uid);
+            const doc = await userRef.get();
+            
+            if (doc.exists) {
+                const userData = doc.data();
+                this.updateUserProfile(userData);
+            }
+        } catch (error) {
+            console.error('Kullanıcı verisi yükleme hatası:', error);
+        }
+    }
+
+    updateUserProfile(userData) {
+        const profileName = document.querySelector('.profile-name');
+        const profileImage = document.querySelector('.profile-image');
         
-        await db.collection('subscriptions').add({
-            userId: auth.currentUser.uid,
-            chapterId,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-
-        alert('Bildirimler açıldı!');
-    } catch (error) {
-        console.error('Bildirim aboneliği hatası:', error);
+        if (profileName) {
+            profileName.textContent = userData.displayName;
+        }
+        
+        if (profileImage) {
+            profileImage.src = userData.photoURL || 'images/default-avatar.jpg';
+        }
     }
 }
 
-// Sayfa yüklendiğinde çalışacak fonksiyonlar
+// Sayfa yüklendiğinde özellikleri başlat
 document.addEventListener('DOMContentLoaded', () => {
-    const chapterId = document.body.dataset.chapterId;
-    if (chapterId) {
-        updateLikeCount(chapterId);
-        checkUserLike(chapterId);
-        checkReadingList(chapterId);
-    }
+    new Features();
 }); 

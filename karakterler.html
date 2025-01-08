@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karakterler - Ateşin Kanatları</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-firestore-compat.js"></script>
 </head>
 <body>
     <header class="main-header">
@@ -14,7 +19,11 @@
                 <li><a href="index.html">Ana Sayfa</a></li>
                 <li><a href="index.html#hikaye">Hikaye</a></li>
                 <li><a href="karakterler.html">Karakterler</a></li>
+                <li><a href="harita.html">Harita</a></li>
                 <li><a href="index.html#bolumler">Bölümler</a></li>
+                <li id="profile-link" style="display: none;">
+                    <a href="profil.html">Profilim</a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -25,20 +34,30 @@
         <div class="character-grid">
             <article class="character-card">
                 <div class="character-image">
-                    <img src="kael.webp" alt="Kael" class="character-img">
+                    <img src="images/kael.jpg" alt="Kael" class="character-img">
                 </div>
                 <h2>Kael</h2>
                 <p class="character-title">Savaşçı Büyücü</p>
                 <p class="character-desc">Zethara'nın kaderini değiştirmeye kararlı genç büyücü. Geçmişin sırlarını çözmeye çalışırken, geleceği şekillendirme yeteneğine sahip.</p>
+                <div class="character-stats">
+                    <span class="stat"><i class="fas fa-fire"></i> Güç: 85</span>
+                    <span class="stat"><i class="fas fa-shield-alt"></i> Savunma: 70</span>
+                    <span class="stat"><i class="fas fa-magic"></i> Büyü: 90</span>
+                </div>
             </article>
 
             <article class="character-card">
                 <div class="character-image">
-                    <img src="area.png" alt="Aera" class="character-img">
+                    <img src="images/aera.jpg" alt="Aera" class="character-img">
                 </div>
                 <h2>Aera</h2>
                 <p class="character-title">Grup Lideri</p>
                 <p class="character-desc">Çelik iradeli lider, grubun umut ışığı. Stratejik zekası ve kararlılığıyla gruba yön veriyor.</p>
+                <div class="character-stats">
+                    <span class="stat"><i class="fas fa-fire"></i> Güç: 75</span>
+                    <span class="stat"><i class="fas fa-shield-alt"></i> Savunma: 85</span>
+                    <span class="stat"><i class="fas fa-brain"></i> Strateji: 95</span>
+                </div>
             </article>
 
             <article class="character-card">
@@ -48,15 +67,25 @@
                 <h2>Lirien</h2>
                 <p class="character-title">Okçu</p>
                 <p class="character-desc">Grubun en genç üyesi. Neşeli tavrının altında derin bir kararlılık yatıyor.</p>
+                <div class="character-stats">
+                    <span class="stat"><i class="fas fa-bullseye"></i> Nişancılık: 95</span>
+                    <span class="stat"><i class="fas fa-running"></i> Çeviklik: 90</span>
+                    <span class="stat"><i class="fas fa-shield-alt"></i> Savunma: 65</span>
+                </div>
             </article>
 
             <article class="character-card">
                 <div class="character-image">
-                    <img src="zethara.webp" alt="Zethara" class="character-img">
+                    <img src="images/zethara.jpg" alt="Zethara" class="character-img">
                 </div>
                 <h2>Zethara</h2>
                 <p class="character-title">Ateş Kraliçesi</p>
                 <p class="character-desc">Yıkım ve umudun tanrıçası. Kalbinde mühürlenmiş eski bir aşkın trajedisini taşıyor.</p>
+                <div class="character-stats">
+                    <span class="stat"><i class="fas fa-fire"></i> Güç: 100</span>
+                    <span class="stat"><i class="fas fa-crown"></i> Liderlik: 95</span>
+                    <span class="stat"><i class="fas fa-magic"></i> Büyü: 100</span>
+                </div>
             </article>
 
             <article class="character-card">
@@ -66,6 +95,11 @@
                 <h2>Orlyn</h2>
                 <p class="character-title">Buz Muhafızı</p>
                 <p class="character-desc">Zethara'nın eski düşmanı ve Donmuş Taç'ın efendisi. Soğuk ve kararlı karakteri, geçmişin derin yaralarını taşıyor.</p>
+                <div class="character-stats">
+                    <span class="stat"><i class="fas fa-snowflake"></i> Buz Gücü: 95</span>
+                    <span class="stat"><i class="fas fa-shield-alt"></i> Savunma: 90</span>
+                    <span class="stat"><i class="fas fa-magic"></i> Büyü: 85</span>
+                </div>
             </article>
 
             <article class="character-card">
@@ -75,6 +109,11 @@
                 <h2>Ateş Muhafızı</h2>
                 <p class="character-title">Zethara'nın Kalbi'nin Bekçisi</p>
                 <p class="character-desc">Kadim güçlerin koruyucusu. Zethara'nın Kalbi'ni korumakla görevli, bilgelik ve güç sahibi muhafız.</p>
+                <div class="character-stats">
+                    <span class="stat"><i class="fas fa-fire"></i> Güç: 90</span>
+                    <span class="stat"><i class="fas fa-shield-alt"></i> Savunma: 100</span>
+                    <span class="stat"><i class="fas fa-scroll"></i> Bilgelik: 95</span>
+                </div>
             </article>
         </div>
     </main>
@@ -87,5 +126,27 @@
         </div>
         <p>&copy; 2024 Ateşin Kanatları. Tüm hakları saklıdır.</p>
     </footer>
+
+    <!-- Scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="features.js"></script>
+    <script>
+        // Sayfa yüklendiğinde profil linkini kontrol et
+        document.addEventListener('DOMContentLoaded', () => {
+            const profileLink = document.getElementById('profile-link');
+            
+            if (firebase.auth().currentUser) {
+                profileLink.style.display = 'block';
+            }
+
+            firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                    profileLink.style.display = 'block';
+                } else {
+                    profileLink.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html> 

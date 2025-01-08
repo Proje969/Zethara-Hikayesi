@@ -6,6 +6,10 @@
     <title>Dünya Haritası - Ateşin Kanatları</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-firestore-compat.js"></script>
 </head>
 <body>
     <header class="main-header">
@@ -17,6 +21,9 @@
                 <li><a href="karakterler.html">Karakterler</a></li>
                 <li><a href="harita.html">Harita</a></li>
                 <li><a href="index.html#bolumler">Bölümler</a></li>
+                <li id="profile-link" style="display: none;">
+                    <a href="profil.html">Profilim</a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -26,38 +33,88 @@
         
         <div class="map-container">
             <div class="map-image">
-                <img src="world-map.jpeg" alt="Dünya Haritası" class="world-map">
+                <img src="images/world-map.jpg" alt="Dünya Haritası" class="world-map">
+                <div class="map-overlay">
+                    <div class="map-point" data-location="ates-diyari" style="top: 35%; left: 45%;">
+                        <i class="fas fa-fire"></i>
+                        <span class="tooltip">Ateş Diyarı</span>
+                    </div>
+                    <div class="map-point" data-location="kristal-zirve" style="top: 20%; left: 65%;">
+                        <i class="fas fa-mountain"></i>
+                        <span class="tooltip">Kristal Zirve</span>
+                    </div>
+                    <div class="map-point" data-location="kizil-tilsim" style="top: 55%; left: 35%;">
+                        <i class="fas fa-tree"></i>
+                        <span class="tooltip">Kızıl Tılsım Ormanları</span>
+                    </div>
+                    <div class="map-point" data-location="donmus-tac" style="top: 25%; left: 25%;">
+                        <i class="fas fa-snowflake"></i>
+                        <span class="tooltip">Donmuş Taç</span>
+                    </div>
+                    <div class="map-point" data-location="golge-ormani" style="top: 70%; left: 55%;">
+                        <i class="fas fa-ghost"></i>
+                        <span class="tooltip">Gölge Ormanı</span>
+                    </div>
+                    <div class="map-point" data-location="efsun-magarasi" style="top: 45%; left: 75%;">
+                        <i class="fas fa-dungeon"></i>
+                        <span class="tooltip">Efsun Mağarası</span>
+                    </div>
+                </div>
             </div>
 
             <div class="map-locations">
-                <article class="location-card">
-                    <h2>Ateş Diyarı</h2>
+                <article class="location-card" id="ates-diyari">
+                    <h2><i class="fas fa-fire"></i> Ateş Diyarı</h2>
                     <p>Zethara'nın hüküm sürdüğü topraklar. Alevlerle çevrili, volkanik bir bölge.</p>
+                    <div class="location-stats">
+                        <span class="stat"><i class="fas fa-thermometer-full"></i> Sıcaklık: Aşırı</span>
+                        <span class="stat"><i class="fas fa-skull"></i> Tehlike: Yüksek</span>
+                    </div>
                 </article>
 
-                <article class="location-card">
-                    <h2>Kristal Zirve</h2>
+                <article class="location-card" id="kristal-zirve">
+                    <h2><i class="fas fa-mountain"></i> Kristal Zirve</h2>
                     <p>Kadim sırların saklandığı, yüksek dağların zirvesindeki kutsal mekan.</p>
+                    <div class="location-stats">
+                        <span class="stat"><i class="fas fa-thermometer-empty"></i> Sıcaklık: Düşük</span>
+                        <span class="stat"><i class="fas fa-skull"></i> Tehlike: Orta</span>
+                    </div>
                 </article>
 
-                <article class="location-card">
-                    <h2>Kızıl Tılsım Ormanları</h2>
+                <article class="location-card" id="kizil-tilsim">
+                    <h2><i class="fas fa-tree"></i> Kızıl Tılsım Ormanları</h2>
                     <p>Büyülü enerjinin yoğun olduğu, gizemli ormanlar. Zethara'nın Kalbi'nin gizlendiği yer.</p>
+                    <div class="location-stats">
+                        <span class="stat"><i class="fas fa-magic"></i> Büyü: Yoğun</span>
+                        <span class="stat"><i class="fas fa-skull"></i> Tehlike: Çok Yüksek</span>
+                    </div>
                 </article>
 
-                <article class="location-card">
-                    <h2>Donmuş Taç</h2>
+                <article class="location-card" id="donmus-tac">
+                    <h2><i class="fas fa-snowflake"></i> Donmuş Taç</h2>
                     <p>Orlyn'in kalesi. Lav denizinin ortasında yükselen, buzla kaplı devasa yapı.</p>
+                    <div class="location-stats">
+                        <span class="stat"><i class="fas fa-thermometer-empty"></i> Sıcaklık: Çok Düşük</span>
+                        <span class="stat"><i class="fas fa-skull"></i> Tehlike: Çok Yüksek</span>
+                    </div>
                 </article>
 
-                <article class="location-card">
-                    <h2>Gölge Ormanı</h2>
+                <article class="location-card" id="golge-ormani">
+                    <h2><i class="fas fa-ghost"></i> Gölge Ormanı</h2>
                     <p>Karanlık sırların ve tehlikelerin gizlendiği, lanetli orman.</p>
+                    <div class="location-stats">
+                        <span class="stat"><i class="fas fa-cloud"></i> Görüş: Çok Düşük</span>
+                        <span class="stat"><i class="fas fa-skull"></i> Tehlike: Yüksek</span>
+                    </div>
                 </article>
 
-                <article class="location-card">
-                    <h2>Efsun Mağarası</h2>
+                <article class="location-card" id="efsun-magarasi">
+                    <h2><i class="fas fa-dungeon"></i> Efsun Mağarası</h2>
                     <p>Kristal Efsun'un saklandığı, kadim mağara sistemi.</p>
+                    <div class="location-stats">
+                        <span class="stat"><i class="fas fa-magic"></i> Büyü: Çok Yoğun</span>
+                        <span class="stat"><i class="fas fa-skull"></i> Tehlike: Orta</span>
+                    </div>
                 </article>
             </div>
         </div>
@@ -71,5 +128,43 @@
         </div>
         <p>&copy; 2024 Ateşin Kanatları. Tüm hakları saklıdır.</p>
     </footer>
+
+    <!-- Scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="features.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Profil linkini kontrol et
+            const profileLink = document.getElementById('profile-link');
+            
+            if (firebase.auth().currentUser) {
+                profileLink.style.display = 'block';
+            }
+
+            firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                    profileLink.style.display = 'block';
+                } else {
+                    profileLink.style.display = 'none';
+                }
+            });
+
+            // Harita noktalarına tıklama olayları ekle
+            const mapPoints = document.querySelectorAll('.map-point');
+            mapPoints.forEach(point => {
+                point.addEventListener('click', () => {
+                    const locationId = point.dataset.location;
+                    const locationCard = document.getElementById(locationId);
+                    if (locationCard) {
+                        locationCard.scrollIntoView({ behavior: 'smooth' });
+                        locationCard.classList.add('highlight');
+                        setTimeout(() => {
+                            locationCard.classList.remove('highlight');
+                        }, 2000);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html> 
