@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body data-chapter-id="bolum1">
+<body>
     <header class="main-header">
         <nav>
             <div class="logo"><a href="index.html">Ateşin Kanatları</a></div>
@@ -17,9 +17,6 @@
                 <li><a href="karakterler.html">Karakterler</a></li>
                 <li><a href="harita.html">Harita</a></li>
                 <li><a href="index.html#bolumler">Bölümler</a></li>
-                <li id="profile-link" style="display: none;">
-                    <a href="profil.html">Profilim</a>
-                </li>
             </ul>
         </nav>
     </header>
@@ -28,12 +25,6 @@
         <article>
             <h1>Bölüm 1: Küllerden Doğuş</h1>
 
-            <!-- Bölüm Etiketleri -->
-            <div class="chapter-tags">
-                <span class="tag">Macera</span>
-                <span class="tag">Fantastik</span>
-                <span class="tag">Giriş</span>
-                <span class="tag">Keşif</span>
             <div class="chapter-text">
                 <p>Sislerin çöktüğü bir şafak vakti, Zethara'nın yerle bir edilmiş topraklarında bir kızıl gün doğmakta. Gökyüzü, alevlerin izleriyle çizilmişçesine parçalanmış bulutlarla dolu. Toprağa karışmış küller, her adımda bir ölüm melodisi gibi çıtlıyor. Bu, kadim bir halkın yeniden doğuş hikayesinin başlangıcı.</p>
 
@@ -85,21 +76,6 @@
                 <p class="chapter-end">Ve o anda, tapınak bir savaş alanına döndü. Grup, kaderlerini yeniden yazmak için savaşa atıldı. Bu, Zethara'nın küllerden doğuşunun sadece ilk adımıydı. Her adım, yeni soruları ve daha büyük bir çatışmayı beraberinde getirecekti.</p>
             </div>
 
-            <!-- Paylaşım Butonları -->
-            <div class="share-buttons">
-                <a href="#" class="share-button" onclick="shareOnTwitter()">
-                    <i class="fab fa-twitter"></i>
-                    Twitter'da Paylaş
-                </a>
-                <a href="#" class="share-button" onclick="shareOnFacebook()">
-                    <i class="fab fa-facebook"></i>
-                    Facebook'ta Paylaş
-                </a>
-                <a href="#" class="share-button" onclick="copyLink()">
-                    <i class="fas fa-link"></i>
-                    Linki Kopyala
-                </a>
-            </div>
             <div class="chapter-navigation">
                 <a href="#" class="nav-button disabled">← Önceki Bölüm</a>
                 <a href="bolum2.html" class="nav-button">Sonraki Bölüm →</a>
@@ -115,25 +91,5 @@
         </div>
         <p>&copy; 2024 Ateşin Kanatları. Tüm hakları saklıdır.</p>
     </footer>
-    <script src="features.js"></script>
-
-        // Paylaşım fonksiyonları
-        function shareOnTwitter() {
-            const text = "Ateşin Kanatları: Küllerden Doğuş - Bölüm 1'i okudum!";
-            const url = window.location.href;
-            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`);
-        }
-
-        function shareOnFacebook() {
-            const url = window.location.href;
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
-        }
-
-        function copyLink() {
-            navigator.clipboard.writeText(window.location.href)
-                .then(() => alert('Link kopyalandı!'))
-                .catch(err => console.error('Link kopyalama hatası:', err));
-        }
-    </script>
 </body>
 </html> 
