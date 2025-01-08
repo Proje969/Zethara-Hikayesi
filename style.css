@@ -366,4 +366,74 @@ h3 {
     font-size: 1.8rem;
     margin: 2rem 0 1rem;
     text-align: center;
+}
+
+/* Harita Sayfası */
+.map-content {
+    padding-top: 100px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 2rem 2rem;
+}
+
+.map-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.map-image {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--accent-color);
+}
+
+.world-map {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.map-locations {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.location-card {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--accent-color);
+    transition: transform 0.3s ease;
+}
+
+.location-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 75, 43, 0.2);
+}
+
+.location-card h2 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.location-card p {
+    color: var(--text-light);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+    .map-container {
+        grid-template-columns: 2fr 1fr;
+    }
+    
+    .map-locations {
+        grid-template-columns: 1fr;
+    }
 } 
