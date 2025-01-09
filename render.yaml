@@ -2,9 +2,5 @@ services:
   - type: web
     name: wings-of-fire
     env: static
-    buildCommand: echo "No build command needed"
-    staticPublishPath: .
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html 
+    buildCommand: null
+    staticPublishPath: . 
