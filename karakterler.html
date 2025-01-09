@@ -98,6 +98,42 @@
                     <i class="fas fa-info-circle"></i> Detaylar için tıklayın
                 </div>
             </article>
+
+            <!-- Gölge Figürü -->
+            <article class="character-card" onclick="openCharacterModal('golge-figuru-modal')">
+                <div class="character-image">
+                    <img src="golge.jpg" alt="Gölge Figürü" class="character-img">
+                </div>
+                <h2>Gölge Figürü</h2>
+                <p class="character-title">Gölgeli Orman'ın Sakini</p>
+                <div class="character-preview">
+                    <i class="fas fa-info-circle"></i> Detaylar için tıklayın
+                </div>
+            </article>
+
+            <!-- Zethara'nın Yansıması -->
+            <article class="character-card" onclick="openCharacterModal('zethara-yansima-modal')">
+                <div class="character-image">
+                    <img src="zetharayansıması.webp" alt="Zethara'nın Yansıması" class="character-img">
+                </div>
+                <h2>Zethara'nın Yansıması</h2>
+                <p class="character-title">Hakikat'in Taşıyıcısı</p>
+                <div class="character-preview">
+                    <i class="fas fa-info-circle"></i> Detaylar için tıklayın
+                </div>
+            </article>
+
+            <!-- Gölgelerin Rehberi -->
+            <article class="character-card" onclick="openCharacterModal('golgelerin-rehberi-modal')">
+                <div class="character-image">
+                    <img src="golge-rehber.webp" alt="Gölgelerin Rehberi" class="character-img">
+                </div>
+                <h2>Gölgelerin Rehberi</h2>
+                <p class="character-title">Sonsuz Koridorların Bekçisi</p>
+                <div class="character-preview">
+                    <i class="fas fa-info-circle"></i> Detaylar için tıklayın
+                </div>
+            </article>
         </div>
 
         <!-- Karakter Modal Pencereleri -->
@@ -270,20 +306,113 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    <p class="character-desc">Kadim güçlerin koruyucusu. Zethara'nın Kalbi'ni korumakla görevli, bilgelik ve güç sahibi muhafız.</p>
+                    <p class="character-desc">Kadim zamanlardan beri Zethara'nın Kalbi'ni koruyan gizemli muhafız. Gücünü ve sadakatini Zethara'dan alan bu varlık, gerçek değerleri test eder.</p>
                     <div class="character-stats">
                         <span class="stat"><i class="fas fa-fire"></i> Güç: 90</span>
-                        <span class="stat"><i class="fas fa-shield-alt"></i> Savunma: 100</span>
-                        <span class="stat"><i class="fas fa-scroll"></i> Bilgelik: 95</span>
+                        <span class="stat"><i class="fas fa-shield-alt"></i> Savunma: 95</span>
+                        <span class="stat"><i class="fas fa-magic"></i> Büyü: 85</span>
                     </div>
                     <div class="character-details">
                         <h3>Karakter Özellikleri</h3>
                         <ul>
-                            <li>Kadim koruma büyüleri</li>
-                            <li>Derin tarih bilgisi</li>
-                            <li>Zethara'ya mutlak sadakat</li>
-                            <li>Güçlü koruyucu içgüdüler</li>
-                            <li>Antik sırların bekçisi</li>
+                            <li>Sarsılmaz sadakat</li>
+                            <li>Güçlü koruyucu içgüdüsü</li>
+                            <li>Antik bilgelik</li>
+                            <li>Test edici doğası</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gölge Figürü Modal -->
+        <div id="golge-figuru-modal" class="character-modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeCharacterModal('golge-figuru-modal')">&times;</span>
+                <div class="modal-header">
+                    <img src="golge.jpg" alt="Gölge Figürü" class="modal-image">
+                    <div class="modal-title">
+                        <h2>Gölge Figürü</h2>
+                        <p class="character-title">Gölgeli Orman'ın Sakini</p>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <p class="character-desc">Gölgeli Orman'ın derinliklerinde yaşayan gizemli varlık. Kahramanların yolculuğunda önemli bir sınav görevi görür.</p>
+                    <div class="character-stats">
+                        <span class="stat"><i class="fas fa-ghost"></i> Gizem: 95</span>
+                        <span class="stat"><i class="fas fa-moon"></i> Gölge Gücü: 90</span>
+                        <span class="stat"><i class="fas fa-eye"></i> Sezgi: 85</span>
+                    </div>
+                    <div class="character-details">
+                        <h3>Karakter Özellikleri</h3>
+                        <ul>
+                            <li>Gölgelerle dans etme yeteneği</li>
+                            <li>Derin sezgisel güçler</li>
+                            <li>Gizemli ve öngörülemeyen doğa</li>
+                            <li>Yol gösterici rolü</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zethara'nın Yansıması Modal -->
+        <div id="zethara-yansima-modal" class="character-modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeCharacterModal('zethara-yansima-modal')">&times;</span>
+                <div class="modal-header">
+                    <img src="zetharayansıması.webp" alt="Zethara'nın Yansıması" class="modal-image">
+                    <div class="modal-title">
+                        <h2>Zethara'nın Yansıması</h2>
+                        <p class="character-title">Hakikat'in Taşıyıcısı</p>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <p class="character-desc">Zethara'nın özünün bir yansıması olan bu varlık, geçmişin hakikatlerini ve geleceğin potansiyelini taşır. Kahramanların karşılaştığı en derin sınavlardan birini temsil eder.</p>
+                    <div class="character-stats">
+                        <span class="stat"><i class="fas fa-fire"></i> Ateş Özü: 100</span>
+                        <span class="stat"><i class="fas fa-balance-scale"></i> Hakikat: 100</span>
+                        <span class="stat"><i class="fas fa-magic"></i> Büyü: 95</span>
+                    </div>
+                    <div class="character-details">
+                        <h3>Karakter Özellikleri</h3>
+                        <ul>
+                            <li>Hakikatleri açığa çıkarma gücü</li>
+                            <li>Zethara'nın özünü taşıma</li>
+                            <li>Dönüştürücü etki</li>
+                            <li>Sınayıcı doğa</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gölgelerin Rehberi Modal -->
+        <div id="golgelerin-rehberi-modal" class="character-modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeCharacterModal('golgelerin-rehberi-modal')">&times;</span>
+                <div class="modal-header">
+                    <img src="golge-rehber.webp" alt="Gölgelerin Rehberi" class="modal-image">
+                    <div class="modal-title">
+                        <h2>Gölgelerin Rehberi</h2>
+                        <p class="character-title">Sonsuz Koridorların Bekçisi</p>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <p class="character-desc">Zethara'nın gölgesinden yaratılmış gizemli bir varlık. Sonsuz Koridorlar'da kahramanları sınayan ve onlara rehberlik eden bilge bir figür.</p>
+                    <div class="character-stats">
+                        <span class="stat"><i class="fas fa-ghost"></i> Gizem: 100</span>
+                        <span class="stat"><i class="fas fa-brain"></i> Bilgelik: 95</span>
+                        <span class="stat"><i class="fas fa-magic"></i> Ruhsal Güç: 90</span>
+                    </div>
+                    <div class="character-details">
+                        <h3>Karakter Özellikleri</h3>
+                        <ul>
+                            <li>Sınayıcı ve rehberlik eden doğa</li>
+                            <li>Derin hakikat bilgisi</li>
+                            <li>Gölge manipülasyonu</li>
+                            <li>Ruhsal yolculuk rehberliği</li>
+                            <li>Zethara ile olan bağlantısı</li>
                         </ul>
                     </div>
                 </div>
