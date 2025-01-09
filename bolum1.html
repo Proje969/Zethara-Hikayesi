@@ -91,5 +91,27 @@
         </div>
         <p>&copy; 2024 Ateşin Kanatları. Tüm hakları saklıdır.</p>
     </footer>
+
+    <script>
+        // Bölüm geçiş animasyonu
+        document.querySelectorAll('.nav-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (!this.classList.contains('disabled')) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    
+                    // Alev animasyonu
+                    const flame = document.createElement('div');
+                    flame.className = 'flame-transition';
+                    document.body.appendChild(flame);
+
+                    // Animasyon tamamlandıktan sonra yönlendirme
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 1000);
+                }
+            });
+        });
+    </script>
 </body>
 </html> 
