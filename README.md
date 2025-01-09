@@ -1,24 +1,36 @@
-# Ateşin Kanatları: Küllerden Doğan Kraliçe
+# Wings of Fire
 
-Fantastik hikaye web sitesi.
+A fantasy story website built with HTML, CSS, and JavaScript.
 
 ## Deployment
 
-Bu site [Render](https://render.com) üzerinde barındırılmaktadır.
+This project is configured for deployment on Render.com as a static site.
 
-### Render.com üzerinde yayınlamak için:
+### Deployment Steps:
 
-1. GitHub'da yeni bir repo oluşturun
-2. Bu projeyi repo'ya push edin
-3. Render.com'da hesap oluşturun
-4. "New +" > "Static Site" seçin
-5. GitHub repo'nuzu bağlayın
-6. Publish directory: `.` olarak ayarlayın
-7. "Create Static Site" butonuna tıklayın
+1. Fork or clone this repository
+2. Create a new Static Site on Render.com
+3. Connect your GitHub repository
+4. Use the following settings:
+   - Build Command: `No build command needed`
+   - Publish Directory: `.`
 
-## Proje Yapısı
+The site will be automatically deployed and updated when you push changes to the main branch.
 
-- `index.html` - Ana sayfa
-- `style.css` - Stil dosyası
-- `script.js` - JavaScript fonksiyonları
-- `render.yaml` - Render.com yapılandırması 
+## Local Development
+
+To run the site locally, simply open `index.html` in your web browser.
+
+## Structure
+
+- `index.html` - Main page
+- `karakterler.html` - Characters page
+- `harita.html` - World map
+- `bolum*.html` - Story chapters
+- `style.css` - Main stylesheet
+- `script.js` - Main JavaScript file
+- Various image assets
+
+## License
+
+© 2024 Wings of Fire. All rights reserved. 
