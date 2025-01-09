@@ -50,6 +50,9 @@
             opacity: 0;
             transform: translateY(50px);
             transition: all 0.8s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .timeline-item.visible {
@@ -95,6 +98,12 @@
 
         .timeline-item:nth-child(odd) .timeline-content {
             margin-left: auto;
+            margin-right: 0;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 0;
+            margin-right: auto;
         }
 
         .timeline-date {
@@ -174,6 +183,7 @@
             .timeline-content {
                 width: calc(100% - 80px);
                 margin-left: 60px !important;
+                margin-right: 0 !important;
             }
 
             .page-title {
@@ -245,7 +255,7 @@
             <!-- Karanlık Dönem -->
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
-                <div class="timeline-content">
+                <div class="timeline-content" style="margin-left: 0; margin-right: auto;">
                     <div class="timeline-date">500 Yıl Önce</div>
                     <h2 class="timeline-title">Karanlık Dönem</h2>
                     <p class="timeline-description">Orlyn'in ihaneti ve Büyük Savaşın başlangıcı.</p>
